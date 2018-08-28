@@ -1,0 +1,15 @@
+env:
+  global:
+    - VERSION=1.${TRAVIS_BUILD_NUMBER}
+
+sudo: required
+
+language: python
+
+services:
+  - docker
+
+before_install:
+  - docker build -t mozillarelops/bsdpy_server:${TRAVIS_BUILD_NUMBER} docker/server
+  - docker build -t mozillarelops/bsdpy_httpd:${TRAVIS_BUILD_NUMBER} docker/httpd
+  - docker build -t mozillarelops/bsdpy_tftpd:${TRAVIS_BUILD_NUMBER} docker/tftpd
